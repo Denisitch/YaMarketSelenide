@@ -7,8 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import pages.YaMarketMainPage;
 import pages.YaMarketSubtitlePage;
 
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static helpers.Properties.testsProperties;
 
 /**
@@ -18,12 +17,12 @@ import static helpers.Properties.testsProperties;
 public class YaMarketTest {
 
     /**
+     * @param titleCatalogItem     название искомой категории в каталоге
+     * @param titleCatalogSubitem  название искомой подкатегории в каталоге
+     * @param titleFiltersCheckbox название фильтра с чекбокс
+     * @param titleSubfilters      критерий фильтра чекбокс
      * @author Осюшкин Денис
      * Тест для проверки результатов поиска в YandexMarket c помощью паттерна Page Object Selenide
-     * @param titleCatalogItem название искомой категории в каталоге
-     * @param titleCatalogSubitem название искомой подкатегории в каталоге
-     * @param titleFiltersCheckbox название фильтра с чекбокс
-     * @param titleSubfilters критерий фильтра чекбокс
      */
     @Feature("Проверка результатов поиска в YandexMarket")
     @DisplayName("Переход на страницу подпункта каталога  и поиск смартфона определенного производителя")
@@ -34,7 +33,12 @@ public class YaMarketTest {
     ) {
         open(testsProperties.yandexMarketUrl(), YaMarketMainPage.class)
                 .hoverToItem(titleCatalogItem)
-                .searchCatalogSubitem(titleCatalogSubitem, YaMarketSubtitlePage.class);
-        sleep(3000);
+                .searchCatalogSubitem(titleCatalogSubitem, YaMarketSubtitlePage.class)
+                .getResultTitle(titleCatalogSubitem)
+                .searchByFilter(titleFiltersCheckbox, titleSubfilters)
+                .scrollToEndPage()
+                .validateTitleFilter(titleSubfilters);
+
+
     }
 }
