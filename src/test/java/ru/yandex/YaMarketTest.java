@@ -14,7 +14,7 @@ import static helpers.Properties.testsProperties;
  * @author Осюшкин Денис
  * Класс тестов, тесты разбиты на step'ы, для проверки результатов поиска в YandexMarket
  */
-public class YaMarketTest {
+public class YaMarketTest extends BaseTest {
 
     /**
      * @param titleCatalogItem     название искомой категории в каталоге

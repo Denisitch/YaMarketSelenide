@@ -17,7 +17,7 @@ public class BaseTest {
      */
     @BeforeAll
     public static void setUp() {
-        Configuration.pageLoadStrategy = "none";
+        Configuration.pageLoadStrategy = "normal";
 
         SelenideLogger.addListener("AllureSelenide",
                 new CustomAllureSelenide()

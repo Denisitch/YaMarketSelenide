@@ -23,6 +23,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 
+/**
+ * @author Осюшкин Денис
+ * Класс, подменяющий AllureSelenide.class. С его помощью делаем скриншот экрана после каждого тестового действия
+ */
 public class CustomAllureSelenide extends AllureSelenide {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AllureSelenide.class);
@@ -87,9 +91,7 @@ public class CustomAllureSelenide extends AllureSelenide {
                     this.lifecycle.addAttachment("Logs from: " + logType, "application/json", ".txt", content);
                 });
             }
-
         });
-
 
         if (this.stepsShouldBeLogged(event)) {
             this.lifecycle.getCurrentTestCaseOrStep().ifPresent((parentUuid) -> {
@@ -108,11 +110,9 @@ public class CustomAllureSelenide extends AllureSelenide {
                     default:
                         LOGGER.warn("Step finished with unsupported status {}", event.getStatus());
                 }
-
                 this.lifecycle.stopStep();
             });
         }
-
     }
 
     private boolean stepsShouldBeLogged(LogEvent event) {
