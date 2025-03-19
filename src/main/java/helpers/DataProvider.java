@@ -18,7 +18,7 @@ public class DataProvider {
     public static Stream<Arguments> dataProvider() {
         return Stream.of(
                 Arguments.of(
-                        "Электроника", "Смартфоны", "Производитель", "Apple"
+                        "Электроника", "Смартфоны", "Бренд", "Apple"
                 )
         );
     }

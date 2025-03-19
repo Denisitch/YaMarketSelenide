@@ -22,7 +22,7 @@ public class YaMarketSubtitlePage extends BasePage {
      * Универсальный селектор названия фильтра
      */
     private static final String TITLE_FILTER =
-            "//div[@data-filter-type='%s']//h4[text()='%s']";
+            "//div[@data-filter-type='%s']//span[.='%s']";
 
     /**
      * Селектор спиннера загрузки страницы при обновлении фильтров
@@ -70,7 +70,8 @@ public class YaMarketSubtitlePage extends BasePage {
      */
     @Step("Выставляем фильтр {titleFilters} по критерию: {titleSubfilters}")
     public YaMarketSubtitlePage searchByFilter(String titleFilters, String titleSubfilters) {
-        $x("//input[@aria-label='в виде сетки']").click();
+//        pastClick();
+        $x("//button[@aria-label='Представление в виде сетки']").click();
         searchFiltersCheckbox(titleFilters, titleSubfilters);
         return this;
     }

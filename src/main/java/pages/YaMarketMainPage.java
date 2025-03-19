@@ -18,7 +18,7 @@ public class YaMarketMainPage extends BasePage {
      * Селектор кнопки каталога
      */
     private static final String CATALOG_BUTTON =
-            "//div[@data-zone-name='catalog']/button";
+            "//div[@data-zone-name='catalog']//button";
 
     /**
      * Селектор названий элементов каталога
@@ -46,13 +46,15 @@ public class YaMarketMainPage extends BasePage {
      */
     @Step("Поиск подкатегории {titleCatalogItem}")
     public YaMarketMainPage hoverToItem(String titleCatalogItem) {
+        pastClick();
         $x(CATALOG_BUTTON).click();
         $x(CATALOG_ITEMS).shouldBe(visible);
         $$x(CATALOG_ITEMS).stream()
                 .filter(item -> item.getText().equals(titleCatalogItem))
                 .findFirst()
                 .ifPresentOrElse(
-                        this::correctCursorHover,
+                        selenideElement -> selenideElement.shouldBe(visible).hover(),
+//                        this::correctCursorHover,
                         () -> fail(titleCatalogItem + " отсутствует в заголовках каталога")
                 );
         return this;
